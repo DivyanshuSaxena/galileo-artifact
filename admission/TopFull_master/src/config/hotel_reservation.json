@@ -1,0 +1,52 @@
+{
+    "name": "hotel_reservation",
+    "data": {
+        "services": ["frontend", "search", "profile", "reservation", "recommendation", "user", "geo", "rate",
+                    "memcached-profile", "mongodb-profile", "memcached-reserve", "mongodb-reservation",
+                    "mongodb-recommendation", "mongodb-user", "mongodb-geo", "mongodb-rate", "memcached-rate"],
+        "api": [
+            {
+                "name": "user",
+                "method": "GET",
+                "url": "/user*",
+                "execution_path": [
+                    "frontend",
+                    "user"
+                ]
+            },
+            {
+                "name": "search",
+                "method": "GET",
+                "url": "/hotels*",
+                "execution_path": [
+                    "frontend",
+                    "search",
+                    "geo",
+                    "rate",
+                    "reservation",
+                    "profile"
+                ]
+            },
+            {
+                "name": "recommend",
+                "method": "GET",
+                "url": "/recommendations*",
+                "execution_path": [
+                    "frontend",
+                    "recommendation",
+                    "profile"
+                ]
+            },
+            {
+                "name": "reserve",
+                "method": "POST",
+                "url": "/reservation*",
+                "execution_path": [
+                    "frontend",
+                    "reservation",
+                    "user"
+                ]
+            }
+        ]
+    }
+}

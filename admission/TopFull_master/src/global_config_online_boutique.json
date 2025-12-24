@@ -1,0 +1,13 @@
+{
+    "checkpoint_path": "~/admission/TopFull_master/src/checkpoint_000701",
+    "microservice_code": "online_boutique",
+    "proxy_dir": "~/controller-helpers/proxy/limits/",
+    "microservice_configuration": "~/admission/TopFull_master/src/config/online_boutique.json",
+    "proxy_url": "http://10.10.1.1:8090",
+    "locust_url": "http://10.10.1.5",
+    "locust_port": 43,
+    "record_target": ["getcart", "getproduct", "postcheckout", "postcart", "emptycart"],
+    "record_path": "~/admission/TopFull_master/src/logs",
+    "num_instance_path": "~/admission/TopFull_master/src/logs/num_agent.csv",
+    "frontend_url": "10.10.1.1:30440"
+}

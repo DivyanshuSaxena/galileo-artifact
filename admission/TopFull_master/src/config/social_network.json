@@ -1,0 +1,49 @@
+{
+    "name": "social_network",
+    "data": {
+        "services": ["compose-post-service", "home-timeline-redis", "home-timeline-service", "media-frontend",
+                    "media-memcached", "media-mongodb", "media-service", "nginx-thrift", "post-storage-memcached",
+                    "post-storage-mongodb", "post-storage-service", "social-graph-mongodb", "social-graph-redis",
+                    "social-graph-service", "text-service", "unique-id-service", "url-shorten-memcached", "url-shorten-mongodb",
+                    "url-shorten-service", "user-memcached", "user-mention-service", "user-mongodb", "user-service",
+                    "user-timeline-mongodb", "user-timeline-redis", "user-timeline-service"],
+        "api": [
+            {
+                "name": "compose_post",
+                "method": "POST",
+                "url": "/post/compose*",
+                "execution_path": ["nginx-web-server",
+                    "compose-post-service",
+                    "text-service",
+                    "media-service",
+                    "unique-id-service",
+                    "user-mention-service",
+                    "user-service",
+                    "user-timeline-service",
+                    "home-timeline-service",
+                    "post-storage-service",
+                    "social-graph-service",
+                    "url-shorten-service"
+                ]
+            },
+            {
+                "name": "read_home_timeline",
+                "method": "GET",
+                "url": "/home-timeline/read*",
+                "execution_path": ["nginx-thrift",
+                    "home-timeline-service",
+                    "post-storage-service"
+                ]
+            },
+            {
+                "name": "read_user_timeline",
+                "method": "GET",
+                "url": "/user-timeline/read*",
+                "execution_path": ["nginx-thrift",
+                    "user-timeline-service",
+                    "post-storage-service"
+                ]
+            }
+        ]
+    }
+}
