@@ -56,7 +56,7 @@ while [ $RESTART_COUNT -lt $MAX_RESTARTS ]; do
     ((RESTART_COUNT++))
     sleep ${RESTART_SLEEP_INTERVAL}
   else
-    echo "Cluster health check passed with latency: $LATENCY ms."
+    echo "CLUSTER HEALTH CHECK PASSED with latency: $LATENCY ms."
     CLUSTER_HEALTH=1
     break
   fi

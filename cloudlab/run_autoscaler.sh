@@ -8,6 +8,8 @@
 # $6: eta (regulate weight of certificate cost)
 # $7: results directory
 # $8: if stress (stress/nostress) - Optional
+# $9: duration in seconds - Optional (default: 3660s)
+# $10: multiplier for the workload - Optional (default: 1)
 
 # Check if there are at least 7 arguments
 if [[ $# -lt 7 ]]; then

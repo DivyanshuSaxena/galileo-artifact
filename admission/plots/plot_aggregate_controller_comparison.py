@@ -378,5 +378,7 @@ plt.tight_layout()
 plt.subplots_adjust(
     top=0.85, bottom=0.08, left=0.26, right=0.98, wspace=0.65, hspace=0.35
 )
+
+os.makedirs("figures", exist_ok=True)
 plt.savefig("figures/" + save_name + ".png")
 plt.savefig("figures/" + save_name + ".pdf")

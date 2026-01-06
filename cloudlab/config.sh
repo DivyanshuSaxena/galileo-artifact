@@ -163,7 +163,7 @@ for i in "${!HOSTS[@]}" ; do
 
     pushd \$HOME/admission/TopFull_master &&
     kubectl kustomize cadvisor | kubectl apply -f - &&
-    popd
+    popd &&
 
     mkdir -p \$HOME/out &&
     mkdir -p \$HOME/logs\""

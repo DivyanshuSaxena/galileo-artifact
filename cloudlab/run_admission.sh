@@ -6,10 +6,11 @@
 # $5: results directory
 # $6: checkpoint to use - Optional (if not provided, use the base checkpoint)
 # $7: if stress (stress/nostress) - Optional
+# $8: duration in seconds - Optional (default: 3660s)
 
 # Check if there are at least 5 arguments
 if [[ $# -lt 5 ]]; then
-  echo "Usage: $0 <experiment_name> <experiment_type> <application> <workload> <results_dir> [<checkpoint-path>] [<if_stress>]"
+  echo "Usage: $0 <experiment_name> <experiment_type> <application> <workload> <results_dir> [checkpoint_path] [if_stress] [duration (S)]"
   exit 1
 fi
 
@@ -19,10 +20,15 @@ APP=$3
 WORKLOAD=$4
 CHECKPOINT_PATH=${6:-""}
 IF_STRESS=${7:-"nostress"}
+TIME=${8:-3660}
 
 # If CHECKPOINT_PATH is not "", split by '/' and get the third last element.
 if [[ $CHECKPOINT_PATH != "" ]]; then
   CHECKPOINT=$(echo $CHECKPOINT_PATH | tr "/" "\n" | tail -3 | head -1)
+  # If CHECKPOINT_PATH starts with a '~', replace it with $HOME
+  if [[ $CHECKPOINT_PATH == ~* ]]; then
+    CHECKPOINT_PATH="\$HOME${CHECKPOINT_PATH:1}"
+  fi
 else
   CHECKPOINT="base"
 fi
@@ -120,8 +126,8 @@ ssh -o StrictHostKeyChecking=no $CLIENT_NODE "tmux new-session -d -s workload \"
 \""
 
 # Sleep for an hour.
-echo "Sleeping for an hour"
-sleep 3660
+echo "Sleeping for ${TIME}s"
+sleep $TIME
 
 # Kill any running stress jobs.
 if [[ $IF_STRESS == "stress" ]]; then

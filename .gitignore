@@ -178,4 +178,4 @@ processed_data*.pkl
 *.png
 *.pdf
 .devcontainer/*
-results/*
+**results/*
