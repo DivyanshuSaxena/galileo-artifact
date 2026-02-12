@@ -11,7 +11,13 @@ if [[ $# -lt 3 ]]; then
 fi
 
 # HOSTS_LINES=`./cloudlab/nodes.sh $1 $2 $3 --all`
-mapfile -t HOST_LINES < <(./cloudlab/nodes.sh $1 $2 $3 --all)
+if builtin mapfile 2>/dev/null; then
+  mapfile -t HOST_LINES < <(./cloudlab/nodes.sh $1 $2 $3 --all)
+else
+  HOST_LINES=()
+  while IFS= read -r l; do HOST_LINES+=("$l"); done \
+    < <(./cloudlab/nodes.sh $1 $2 $3 --all)
+fi
 
 # Save in a variable -- needed later.
 EXP_NAME=$1

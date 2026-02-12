@@ -12,7 +12,13 @@ fi
 EXP_NAME=$1
 APP=$2
 
-mapfile -t HOSTS < <(./cloudlab/nodes.sh ${EXP_NAME} 0 4 --all)
+if builtin mapfile 2>/dev/null; then
+  mapfile -t HOSTS < <(./cloudlab/nodes.sh ${EXP_NAME} 0 4 --all)
+else
+  HOSTS=()
+  while IFS= read -r l; do HOSTS+=("$l"); done \
+    < <(./cloudlab/nodes.sh ${EXP_NAME} 0 4 --all)
+fi
 
 CONTROL_NODE=${HOSTS[0]}
 CLIENT_NODE=${HOSTS[4]}
